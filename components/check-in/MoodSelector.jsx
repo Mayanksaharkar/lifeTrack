@@ -14,7 +14,7 @@ export default function MoodSelector() {
   const [selected, setSelected] = useState(null);
 
   return (
-    <Box className="bg-white p-4 rounded-2xl mx-4 mb-2 shadow">
+    <Box className="bg-white p-4 rounded-2xl mx-4 mb-2  mt-4">
       <Text className="text-lg font-semibold text-center mb-3">How was your day?</Text>
       <HStack justifyContent="space-around">
         {moods.map(({ icon: Icon, label }, index) => {

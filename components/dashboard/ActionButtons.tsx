@@ -5,10 +5,10 @@ export default function ActionButtons() {
   const navigation = useNavigation();
 
   const handleCaptureDayClick = () => {
-    navigation.navigate('check-in'); // Replace 'Checkin' with the actual name of your tab or screen
+    navigation.navigate('check-in'); 
   };
   const handleExpensesClick = () => {
-    navigation.navigate('expenses'); // Replace 'Checkin' with the actual name of your tab or screen
+    navigation.navigate('expenses'); 
   };
 
   return (

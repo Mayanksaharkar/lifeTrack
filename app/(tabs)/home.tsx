@@ -1,7 +1,7 @@
 import ActionButtons from '@/components/dashboard/ActionButtons';
 import Header from '@/components/dashboard/Header';
-import RecentActivity from '@/components/dashboard/RecentActivity';
 import SummaryCard from '@/components/dashboard/SummaryCard';
+import RecentTransactions from '@/components/expenses/RecentTransactions';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 
@@ -24,8 +24,8 @@ export default function HomeScreen() {
                   <ActionButtons />
                 </View>
       
-                <View>
-                  <RecentActivity />
+                <View className="px-4">
+                  <RecentTransactions />
                 </View>
               </View>
             </ScrollView>
