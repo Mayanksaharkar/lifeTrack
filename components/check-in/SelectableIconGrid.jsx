@@ -18,7 +18,7 @@ const SelectableIconGrid = ({ title, items }) => {
   };
 
   return (
-    <Box className="bg-white p-4 rounded-2xl mx-4 shadow">
+    <Box className="bg-white p-4 rounded-2xl mx-4 " shadowColor='$black' boxShadow={'$lg'} >
         <Text className=" mb-3" fontWeight={'$bold'} fontSize={'$lg'}>{title}</Text>
         <VStack space="md">
           {Array.from({ length: Math.ceil(items.length / 4) }, (_, rowIndex) => (

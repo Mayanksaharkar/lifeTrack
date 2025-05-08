@@ -22,7 +22,7 @@ export default function TabLayout() {
     <StyledProvider config={{ ...UIConfig, colorMode: "light" }}>
       <OverlayProvider>
         <Tabs
-          initialRouteName="expenses"
+          initialRouteName="home"
           screenOptions={{
             tabBarActiveTintColor: "#3b82f6",
             headerShown: true,
