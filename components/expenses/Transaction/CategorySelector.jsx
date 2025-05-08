@@ -23,6 +23,7 @@ import {
 } from "lucide-react-native";
 import React, { useState } from "react";
 import { Modal, Pressable, Text, TouchableOpacity } from "react-native";
+import { useExpenseContext } from "@/app/context/ExpenseContext";
 const CATEGORY_OPTIONS = [
   {
     label: "Baby",
@@ -116,10 +117,10 @@ const CATEGORY_OPTIONS = [
   },
 ];
 
-export default function CategorySelector({ category, setCategory }) {
+export default function CategorySelector() {
   const [modalVisible, setModalVisible] = useState(false);
+  const {category,setCategory} = useExpenseContext();
   const [selected, setSelected] = useState(category || "");
-
   const handleSelect = (item) => {
     setSelected(item);
     setCategory(item);

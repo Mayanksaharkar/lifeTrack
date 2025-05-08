@@ -2,11 +2,13 @@ import { Button, Text, VStack, View } from "@gluestack-ui/themed";
 import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
-import RecentTransactions from "../../components/expenses/RecentTransactions";
 import AccountsDisplay from "../../components/expenses/AccountsDisplay";
+import RecentTransactions from "../../components/expenses/RecentTransactions";
+import { ExpenseProvider } from "../context/ExpenseContext";
 const Expenses = () => {
   const router = useRouter();
   return (
+    <ExpenseProvider>
     <View height={"100%"} width="100%" className="bg-slate-100 ">
       <ScrollView className="p-4 bg-gray/50 h-full">
         <VStack space="md">
@@ -22,8 +24,9 @@ const Expenses = () => {
           <RecentTransactions />
           <AccountsDisplay />
         </VStack>
-      </ScrollView>{" "}
+      </ScrollView>
     </View>
+    </ExpenseProvider>
   );
 };
 

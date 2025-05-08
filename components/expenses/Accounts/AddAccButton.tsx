@@ -1,23 +1,17 @@
 import { Button, Icon, Text } from "@gluestack-ui/themed";
-import { PlusCircle } from "lucide-react-native";
-import { useState } from "react";
+import { DollarSign, PlusCircle } from "lucide-react-native";
 import { Modal, TextInput, View } from "react-native";
-import { DollarSign } from "lucide-react-native";
-export default function AddAccButton({ handleAccountAdd }) {
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const [newAccount, setNewAccount] = useState({
-    name: "",
-    balance: "",
-    icons: DollarSign,
-  });
+import { useExpenseContext } from "@/app/context/ExpenseContext";
+export default function AddAccButton() {
+  const {accModalVisible, setAccModalVisible , handleAccountAdd , newAccount, setNewAccount } = useExpenseContext();
+  
 
   return (
     <View>
       <Button
         variant="solid"
         borderRadius="$lg"
-        onPress={() => setModalVisible(true)}
+        onPress={() => setAccModalVisible(true)}
       >
         <Icon as={PlusCircle} size="md" color="$white" mr="$2" />
         <Text className="font-semibold" color="$white">
@@ -27,9 +21,9 @@ export default function AddAccButton({ handleAccountAdd }) {
 
       <Modal
         transparent
-        visible={modalVisible}
+        visible={accModalVisible}
         animationType="slide"
-        onRequestClose={() => setModalVisible(false)}
+        onRequestClose={() => setAccModalVisible(false)}
       >
         <View className="flex-1 justify-center items-center bg-black/30">
           <View className="bg-white rounded-xl w-4/5 max-w-[340px] p-4">
@@ -74,7 +68,7 @@ export default function AddAccButton({ handleAccountAdd }) {
                 onPress={() => {
                   handleAccountAdd(newAccount);
                   setNewAccount({ name: "", balance: "", icons: DollarSign });
-                  setModalVisible(false);
+                  setAccModalVisible(false);
                 }}
               >
                 <Text className="font-semibold" color="$white">
@@ -85,7 +79,7 @@ export default function AddAccButton({ handleAccountAdd }) {
                 variant="solid"
                 borderRadius="$lg"
                 onPress={() => {
-                  setModalVisible(false);
+                  setAccModalVisible(false);
                 }}
               >
                 <Text className="font-semibold" color="$white">

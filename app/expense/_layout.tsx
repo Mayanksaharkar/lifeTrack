@@ -1,15 +1,18 @@
+import { Box, Pressable, Text } from '@gluestack-ui/themed';
 import { Stack } from 'expo-router';
-import { useState } from 'react';
-import  { useExpenseContext } from '../context/ExpenseContext'; // adjust if needed
-import  ExpenseContext  from '../context/ExpenseContext'; // adjust if needed
-import { Box, Text, Pressable } from '@gluestack-ui/themed';
 import { Check } from 'lucide-react-native';
+import { useState } from 'react';
+import {  useExpenseContext } from '../context/ExpenseContext'; 
 
 export default function ExpenseLayout() {
-  const [handleSave, setHandleSave] = useState(() => () => {});
+  const [expenseState, setExpenseState] = useState({
+    handleSave: () => {
+      // Default save handler logic
+    },
+  });
 
   return (
-    <ExpenseContext.Provider value={{ handleSave, setHandleSave }}>
+  
       <Stack>
         <Stack.Screen
           name="add"
@@ -19,7 +22,6 @@ export default function ExpenseLayout() {
           }}
         />
       </Stack>
-    </ExpenseContext.Provider>
   );
 }
 

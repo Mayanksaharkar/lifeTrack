@@ -7,10 +7,11 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-
+import { useExpenseContext } from '@/app/context/ExpenseContext';
 const ACCOUNT_OPTIONS = ['Cash', 'Bank1', 'Bank2'];
 
-export default function AccSelector({ account, setAccount }) {
+export default function AccSelector() {
+  const { account, setAccount } = useExpenseContext();
   const [modalVisible, setModalVisible] = useState(false);
   const [selected, setSelected] = useState(account || '');
 
