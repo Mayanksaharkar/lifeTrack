@@ -11,7 +11,7 @@ export default function TransactionItem({ account, label, date, amount }: Transa
   return (
     <HStack justifyContent="space-between" alignItems="center" className="py-3">
       <HStack alignItems="center" space="sm">
-        <Box className="  flex justify-center py-4 px-2 shadow shadow-black" backgroundColor="$white " minWidth={70} alignItems='center' height={40}  rounded={10} >
+        <Box className="  flex justify-center  px-2 shadow shadow-black" backgroundColor="$white " minWidth={70} alignItems='center' height={40}  rounded={10} >
           <Text color={"$black"} >
             {account}
           </Text>
