@@ -15,7 +15,6 @@ import {
 } from "lucide-react-native";
 import React from "react";
 import { Platform } from "react-native";
-import { ExpenseProvider } from "../context/ExpenseContext";
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
@@ -59,7 +58,7 @@ export default function TabLayout() {
               title: "Check In",
               tabBarIcon: ({ color, focused }) =>
                 focused ? (
-                  <LogIn color={color} stroke={"#DBEAFE"} />
+                  <LogIn color={color} stroke={"#3b82f6"} />
                 ) : (
                   <LogIn color={color} />
                 ),

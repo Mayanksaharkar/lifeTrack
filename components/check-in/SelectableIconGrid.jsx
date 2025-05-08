@@ -4,6 +4,11 @@ import React, { useState } from 'react';
 const SelectableIconGrid = ({ title, items }) => {
   const [selected, setSelected] = useState([]);
 
+  // useEffect(() => {
+  //   console.log('Selected items:', selected);
+  // }
+  // , [selected]);  
+
   const toggle = (label) => {
     if (selected.includes(label)) {
       setSelected(selected.filter((l) => l !== label));
@@ -14,7 +19,7 @@ const SelectableIconGrid = ({ title, items }) => {
 
   return (
     <Box className="bg-white p-4 rounded-2xl mx-4 shadow">
-        <Text className="text-lg font-semibold mb-3">{title}</Text>
+        <Text className=" mb-3" fontWeight={'$bold'} fontSize={'$lg'}>{title}</Text>
         <VStack space="md">
           {Array.from({ length: Math.ceil(items.length / 4) }, (_, rowIndex) => (
             <HStack key={rowIndex} space="lg" justifyContent="space-between">
@@ -23,15 +28,18 @@ const SelectableIconGrid = ({ title, items }) => {
                 return (
                   <Pressable
                     key={label}
+                    gap={5}
                     onPress={() => toggle(label)}
                     className="items-center"
                   >
                     <Box
-                      className={`p-3 rounded-full mb-1 ${
-                        active ? 'bg-blue-100' : 'bg-gray-100'
-                      }`}
+                      rounded={30}
+                      backgroundColor={active ? '#3b82f6' : '#f3f4f6'}
+                      padding={15}
+                      className='shadow shadow-black'
+                      
                     >
-                      <Icon size={24} color={active ? '#3b82f6' : '#6b7280'} />
+                      <Icon size={24} color={active ? '#f3f4f6' : '#3b82f6'} />
                     </Box>
                     <Text  fontSize={12} fontWeight={'$medium'} className=" text-xxs text-gray-700">{label}</Text>
                   </Pressable>

@@ -1,9 +1,13 @@
 // import {  } from '@gluestack-ui/themed';
 
-import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, 
-    StyleSheet, Alert } from "react-native";
+import { Text, Textarea, TextareaInput } from "@gluestack-ui/themed";
 import * as ImagePicker from "expo-image-picker";
+import React, { useState } from "react";
+import {
+  Alert,
+  Image, TouchableOpacity,
+  View
+} from "react-native";
 export default function NotesSection() {
   const [file, setFile] = useState(null);
 
@@ -40,15 +44,19 @@ export default function NotesSection() {
 
   return (
     <View className="flex-1 p-4">
-      <Text className="text-lg font-bold mb-4">
+       <Text className=" mb-3" fontWeight={'$bold'} fontSize={'$lg'}>Notes</Text>
+      <Textarea>
+        <TextareaInput placeholder="Add notes about your day..." />
+      </Textarea>
+      <Text className=" mb-3" fontWeight={'$bold'} fontSize={'$lg'}>
         Add Image:
       </Text>
 
       <TouchableOpacity
-        className="bg-blue-500 py-2 px-4 rounded mb-4"
+        className="bg-blue py-2 px-4 rounded mb-4"
         onPress={pickImage}
       >
-        <Text className="text-white text-center">
+        <Text color={'$white'} className=" text-center">
           Choose Image
         </Text>
       </TouchableOpacity>

@@ -1,13 +1,13 @@
-import { Box, HStack, Pressable, Text } from '@gluestack-ui/themed';
-import { Angry, Frown, Laugh, Meh, Smile } from 'lucide-react-native';
-import { useState } from 'react';
+import { Box, HStack, Pressable, Text } from "@gluestack-ui/themed";
+import { Angry, Frown, Laugh, Meh, Smile } from "lucide-react-native";
+import { useState } from "react";
 
 const moods = [
-  { icon: Angry, label: 'Awful' },
-  { icon: Frown, label: 'Bad' },
-  { icon: Meh, label: 'Okay' },
-  { icon: Smile, label: 'Good' },
-  { icon: Laugh, label: 'Great' },
+  { icon: Angry, label: "Awful" },
+  { icon: Frown, label: "Bad" },
+  { icon: Meh, label: "Okay" },
+  { icon: Smile, label: "Good" },
+  { icon: Laugh, label: "Great" },
 ];
 
 export default function MoodSelector() {
@@ -15,7 +15,9 @@ export default function MoodSelector() {
 
   return (
     <Box className="bg-white p-4 rounded-2xl mx-4 mb-2  mt-4">
-      <Text className="text-lg font-semibold text-center mb-3">How was your day?</Text>
+      <Text className="text-lg font-semibold text-center mb-3">
+        How was your day?
+      </Text>
       <HStack justifyContent="space-around">
         {moods.map(({ icon: Icon, label }, index) => {
           const isActive = selected === index;
@@ -23,11 +25,12 @@ export default function MoodSelector() {
             <Pressable
               key={index}
               onPress={() => setSelected(index)}
-              className={`rounded-full p-2 ${
-                isActive ? 'bg-yellow-200' : 'bg-gray-100'
-              }`}
-            >
-              <Icon color={isActive ? '#eab308' : '#6b7280'} size={28} />
+              padding={11}
+              className="items-center"
+              // backgroundColor={isActive ? "#3b82f6" : "#f3f4f6"}
+              rounded={30}
+             >
+              <Icon color={isActive ? "#3b82f6" : "#6b7280"} size={32}  />
             </Pressable>
           );
         })}
