@@ -2,7 +2,7 @@ import { Box, Pressable, Text } from '@gluestack-ui/themed';
 import { Stack } from 'expo-router';
 import { Check } from 'lucide-react-native';
 import { useState } from 'react';
-import {  useExpenseContext } from '../context/ExpenseContext'; 
+import { useExpenseContext } from '../../context/ExpenseContext';
 
 export default function ExpenseLayout() {
   const [expenseState, setExpenseState] = useState({

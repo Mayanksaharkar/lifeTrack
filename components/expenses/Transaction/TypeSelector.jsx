@@ -1,7 +1,7 @@
 // EntryTypeSelector.jsx
+import { useExpenseContext } from '@/context/ExpenseContext';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { useExpenseContext } from '@/app/context/ExpenseContext';
 const types = ['INCOME', 'EXPENSE', 'TRANSFER'];
 
 export default function TypeSelector() {

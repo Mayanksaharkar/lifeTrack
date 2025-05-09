@@ -4,7 +4,7 @@ import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import AccountsDisplay from "../../components/expenses/AccountsDisplay";
 import RecentTransactions from "../../components/expenses/RecentTransactions";
-import { ExpenseProvider } from "../context/ExpenseContext";
+import { ExpenseProvider } from "../../context/ExpenseContext";
 const Expenses = () => {
   const router = useRouter();
   return (

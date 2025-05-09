@@ -3,9 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     }
   },
   "include": [
@@ -18,6 +16,7 @@
     "components",
     "hooks",
     "constants",
-    "nativewind-env.d.ts"
+    "nativewind-env.d.ts",
+    "context"
   ]
 }

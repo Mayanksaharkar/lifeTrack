@@ -1,29 +1,29 @@
+import { useExpenseContext } from "@/context/ExpenseContext";
 import { View } from "@gluestack-ui/themed";
 import {
-  Baby,
-  Bus,
-  Car,
-  ChevronDown,
-  CircleDashed,
-  Dumbbell,
-  GraduationCap,
-  Home,
-  Laptop,
-  Phone,
-  Plane,
-  Receipt,
-  Scissors,
-  Shield,
-  Shirt,
-  ShoppingBag,
-  Stethoscope,
-  Tag,
-  Users,
-  Utensils,
+    Baby,
+    Bus,
+    Car,
+    ChevronDown,
+    CircleDashed,
+    Dumbbell,
+    GraduationCap,
+    Home,
+    Laptop,
+    Phone,
+    Plane,
+    Receipt,
+    Scissors,
+    Shield,
+    Shirt,
+    ShoppingBag,
+    Stethoscope,
+    Tag,
+    Users,
+    Utensils,
 } from "lucide-react-native";
 import React, { useState } from "react";
 import { Modal, Pressable, Text, TouchableOpacity } from "react-native";
-import { useExpenseContext } from "@/app/context/ExpenseContext";
 const CATEGORY_OPTIONS = [
   {
     label: "Baby",

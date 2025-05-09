@@ -1,13 +1,13 @@
+import { useExpenseContext } from '@/context/ExpenseContext';
 import { ChevronDown, Wallet } from 'lucide-react-native';
 import React, { useState } from 'react';
 import {
-  Modal,
-  Pressable,
-  Text,
-  TouchableOpacity,
-  View
+    Modal,
+    Pressable,
+    Text,
+    TouchableOpacity,
+    View
 } from 'react-native';
-import { useExpenseContext } from '@/app/context/ExpenseContext';
 const ACCOUNT_OPTIONS = ['Cash', 'Bank1', 'Bank2'];
 
 export default function AccSelector() {

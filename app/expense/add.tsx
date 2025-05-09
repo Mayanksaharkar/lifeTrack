@@ -1,5 +1,5 @@
 import { Box } from '@gluestack-ui/themed';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { SafeAreaView, ScrollView, View } from 'react-native';
 
 import AccSelector from '../../components/expenses/Transaction/AccSelector';
@@ -8,7 +8,7 @@ import CategorySelector from '../../components/expenses/Transaction/CategorySele
 import DateTimeDisplay from '../../components/expenses/Transaction/DateTime';
 import NotesInput from '../../components/expenses/Transaction/NoteInput';
 import TypeSelector from '../../components/expenses/Transaction/TypeSelector';
-import { ExpenseProvider } from '../context/ExpenseContext';
+import { ExpenseProvider } from '../../context/ExpenseContext';
 
 export default function AddTransactionScreen() {
  

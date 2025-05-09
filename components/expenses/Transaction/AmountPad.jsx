@@ -1,7 +1,7 @@
 // AmountPad.jsx
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { useExpenseContext } from '../../../app/context/ExpenseContext';
+import { useExpenseContext } from '../../../context/ExpenseContext';
 const padKeys = ['1','2','3','4','5','6','7','8','9','.','0','←'];
 
 export default function AmountPad() {

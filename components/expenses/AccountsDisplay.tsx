@@ -1,4 +1,4 @@
-import { useExpenseContext } from "@/app/context/ExpenseContext";
+import { useExpenseContext } from "@/context/ExpenseContext";
 import { Text, VStack } from "@gluestack-ui/themed";
 import { ScrollView } from "react-native";
 import AccountCard from "./Accounts/AccountCard";

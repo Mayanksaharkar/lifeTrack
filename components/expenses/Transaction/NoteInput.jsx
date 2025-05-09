@@ -1,7 +1,7 @@
+import { useExpenseContext } from '@/context/ExpenseContext';
 import { Pencil } from 'lucide-react-native';
 import React from 'react';
 import { TextInput, View } from 'react-native';
-import { useExpenseContext } from '@/app/context/ExpenseContext';
 export default function NoteInput() {
   const { notes, setNotes } = useExpenseContext();
   return (

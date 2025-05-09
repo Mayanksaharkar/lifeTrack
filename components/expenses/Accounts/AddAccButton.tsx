@@ -1,7 +1,7 @@
+import { useExpenseContext } from "@/context/ExpenseContext";
 import { Button, Icon, Text } from "@gluestack-ui/themed";
 import { DollarSign, PlusCircle } from "lucide-react-native";
 import { Modal, TextInput, View } from "react-native";
-import { useExpenseContext } from "@/app/context/ExpenseContext";
 export default function AddAccButton() {
   const {accModalVisible, setAccModalVisible , handleAccountAdd , newAccount, setNewAccount } = useExpenseContext();
   

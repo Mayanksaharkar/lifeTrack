@@ -1,4 +1,4 @@
-import { useExpenseContext } from "@/app/context/ExpenseContext";
+import { useExpenseContext } from "@/context/ExpenseContext";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Calendar, Clock } from "lucide-react-native";
 import React, { useState } from "react";
