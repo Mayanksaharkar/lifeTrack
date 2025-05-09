@@ -1,9 +1,6 @@
-import React from 'react';
-import { Select, SelectTrigger, SelectInput, SelectIcon, SelectPortal, SelectContent, SelectItem, SelectBackdrop, SelectDragIndicator, SelectDragIndicatorWrapper } from '@gluestack-ui/themed';
-import { ChevronDown } from 'lucide-react-native';
-import { Text, HStack, Icon } from '@gluestack-ui/themed';
-import { Home, User, Settings } from 'lucide-react-native';
-
+import { HStack, Icon, Select, SelectBackdrop, SelectContent, SelectDragIndicator, SelectDragIndicatorWrapper, SelectIcon, SelectInput, SelectItem, SelectPortal, SelectTrigger, Text } from '@gluestack-ui/themed';
+import { ChevronDown, Home, Settings, User } from 'lucide-react-native';
+import React, { useState } from 'react';
 const options = [
   { label: 'Home', icon: Home, value: 'home' },
   { label: 'Profile', icon: User, value: 'profile' },
@@ -11,7 +8,7 @@ const options = [
 ];
 
 const IconSelect = () => {
-  const [selectedValue, setSelectedValue] = React.useState('');
+  const [selectedValue, setSelectedValue] = useState('');
 
   return (
     <Select selectedValue={selectedValue} onValueChange={setSelectedValue}>

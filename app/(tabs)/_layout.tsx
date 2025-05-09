@@ -4,8 +4,8 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import { StyledProvider } from "@gluestack-style/react";
 import { config as UIConfig } from "@gluestack-ui/config";
 import { OverlayProvider } from "@gluestack-ui/overlay";
-import { Box } from "@gluestack-ui/themed";
-import { Tabs } from "expo-router";
+import { Box, Button, Text } from "@gluestack-ui/themed";
+import { router, Tabs } from "expo-router";
 import {
   ChartArea,
   HomeIcon,
@@ -46,7 +46,17 @@ export default function TabLayout() {
                 ) : (
                   <HomeIcon color={color} />
                 ),
-
+              headerRight: () => (
+                <Box mx="$4" flexDirection="row" alignItems="center">
+                  <Button
+                    onPress={() => {
+                      router.push("/authentication/login");
+                    }}
+                  >
+                    <Text>Login</Text>
+                  </Button>
+                </Box>
+              ),
               headerTitleStyle: {
                 fontWeight: "bold",
               },
