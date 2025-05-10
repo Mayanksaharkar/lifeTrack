@@ -1,16 +1,26 @@
-// AmountPad.jsx
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useExpenseContext } from '../../../context/ExpenseContext';
 const padKeys = ['1','2','3','4','5','6','7','8','9','.','0','←'];
 
 export default function AmountPad() {
-  const {amount, setAmount} = useExpenseContext();
+  const { transaction, setTransaction } = useExpenseContext();
+  const amount = transaction.amount;
+
   const handlePress = (key) => {
     if (key === '←') {
-      setAmount(amount.length > 1 ? amount.slice(0, -1) : '0');
+      setTransaction((prev) => ({
+        ...prev,
+        amount: prev.amount.length > 1 ? prev.amount.slice(0, -1) : '0',
+      }));
     } else {
-      setAmount(amount === '0' && key !== '.' ? key : amount + key);
+      setTransaction((prev) => ({
+        ...prev,
+        amount:
+          prev.amount === '0' && key !== '.'
+            ? key
+            : prev.amount + key,
+      }));
     }
   };
 

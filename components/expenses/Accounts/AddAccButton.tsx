@@ -2,10 +2,17 @@ import { useExpenseContext } from "@/context/ExpenseContext";
 import { Button, Icon, Text } from "@gluestack-ui/themed";
 import { DollarSign, PlusCircle } from "lucide-react-native";
 import { Modal, TextInput, View } from "react-native";
+import { useAuth } from "../../../context/AuthContext";
 export default function AddAccButton() {
-  const {accModalVisible, setAccModalVisible , handleAccountAdd , newAccount, setNewAccount } = useExpenseContext();
-  
+  const {
+    accModalVisible,
+    setAccModalVisible,
+    handleAccountAdd,
+    newAccount,
+    setNewAccount,
+  } = useExpenseContext();
 
+  const { user } = useAuth();
   return (
     <View>
       <Button
@@ -66,7 +73,7 @@ export default function AddAccButton() {
                 variant="solid"
                 borderRadius="$lg"
                 onPress={() => {
-                  handleAccountAdd(newAccount);
+                  handleAccountAdd({ newAccount, userId: user?.uid });
                   setNewAccount({ name: "", balance: "", icons: DollarSign });
                   setAccModalVisible(false);
                 }}

@@ -16,30 +16,30 @@ export const AuthProvider = ({ children }) => {
       setUser(user);
       setIsLoggedIn(!!user);
       setLoading(false);
+      
     });
     return unsubscribe;
   }, []);
   if (loading) {
-    return null; 
+    return null;
   }
+
 
   const handleLogin = async ({ email, password }) => {
     signInWithEmailAndPassword(firebaseauth, email, password)
       .then(async (userCredential) => {
-        
         const user = userCredential.user;
         console.log("User logged in:", user);
         setUser(user);
-        setIsLoggedIn(true); 
+        setIsLoggedIn(true);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log("Error logging in:", errorCode, errorMessage);
-        setIsLoggedIn(false); 
+        setIsLoggedIn(false);
       })
       .finally(() => {
-        
         console.log("User login status:", isLoggedIn);
       });
 

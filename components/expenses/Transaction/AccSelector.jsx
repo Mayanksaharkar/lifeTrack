@@ -2,28 +2,31 @@ import { useExpenseContext } from '@/context/ExpenseContext';
 import { ChevronDown, Wallet } from 'lucide-react-native';
 import React, { useState } from 'react';
 import {
-    Modal,
-    Pressable,
-    Text,
-    TouchableOpacity,
-    View
+  Modal,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
-const ACCOUNT_OPTIONS = ['Cash', 'Bank1', 'Bank2'];
 
 export default function AccSelector() {
-  const { account, setAccount } = useExpenseContext();
+  const { accounts, transaction, setTransaction } = useExpenseContext();
   const [modalVisible, setModalVisible] = useState(false);
-  const [selected, setSelected] = useState(account || '');
+
+
+  // Use the selected account from transaction context
+  const selected = transaction.accountType || '';
 
   const handleSelect = (item) => {
-    setSelected(item);
-    setAccount(item);
+    setTransaction((prev) => ({
+      ...prev,
+      accountType: item,
+    }));
     setModalVisible(false);
   };
 
   return (
     <View className="w-[48%]">
-      
       <TouchableOpacity
         onPress={() => setModalVisible(true)}
         className="bg-gray-100 rounded-lg p-3 flex-row items-center justify-between"
@@ -37,7 +40,6 @@ export default function AccSelector() {
         <ChevronDown color="#3b82f6" size={16} />
       </TouchableOpacity>
 
-      
       <Modal
         transparent
         visible={modalVisible}
@@ -52,15 +54,19 @@ export default function AccSelector() {
             <Text className="text-lg font-bold text-center mb-4 text-blue-500">
               Select Account
             </Text>
-            {ACCOUNT_OPTIONS.map((item) => (
-              <TouchableOpacity
-                key={item}
-                onPress={() => handleSelect(item)}
-                className="py-3 px-4 border-b border-gray-200"
-              >
-                <Text className="text-base text-gray-800">{item}</Text>
-              </TouchableOpacity>
-            ))}
+            {accounts && accounts.length > 0 ? (
+              accounts.map((item) => (
+                <TouchableOpacity
+                  key={item.id}
+                  onPress={() => handleSelect(item.name)}
+                  className="py-3 px-4 border-b border-gray-200"
+                >
+                  <Text className="text-base text-gray-800">{item.name}</Text>
+                </TouchableOpacity>
+              ))
+            ) : (
+              <Text className="text-center text-gray-400">No accounts found</Text>
+            )}
           </View>
         </Pressable>
       </Modal>

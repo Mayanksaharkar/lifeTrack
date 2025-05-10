@@ -11,7 +11,7 @@ import { Edit3, LucideIcon, MoreVertical, Trash2 } from "lucide-react-native";
 import React from "react";
 
 interface AccountCardProps {
-  icon: LucideIcon;
+  
   title: string;
   balance: string;
   iconBgColor: string;
@@ -20,7 +20,6 @@ interface AccountCardProps {
 }
 
 const AccountCard = ({
-  icon: IconComponent,
   title,
   balance,
   onEdit,
@@ -41,12 +40,12 @@ const AccountCard = ({
     <Box className="border border-gray rounded-lg px-4 py-3 mb-2 bg-white">
       <HStack justifyContent="space-between" alignItems="center">
         <HStack space="md" alignItems="center">
-          <Box className="p-3 shadow shadow-black bg-blue" rounded="$full">
-            <Icon as={IconComponent} size="md" color="$white" />
+          <Box className="p-5 shadow shadow-black bg-blue" rounded="$full">
+            {/* <Icon as={IconComponent} size="md" color="$white" /> */}
           </Box>
           <VStack>
             <Text className="text-blue text-base font-semibold">{title}</Text>
-            <Text className="text-green-400">Balance: ₹{balance}</Text>
+            <Text className="">Balance: ₹{balance}</Text>
           </VStack>
         </HStack>
 

@@ -1,26 +1,26 @@
 import { useExpenseContext } from "@/context/ExpenseContext";
 import { View } from "@gluestack-ui/themed";
 import {
-    Baby,
-    Bus,
-    Car,
-    ChevronDown,
-    CircleDashed,
-    Dumbbell,
-    GraduationCap,
-    Home,
-    Laptop,
-    Phone,
-    Plane,
-    Receipt,
-    Scissors,
-    Shield,
-    Shirt,
-    ShoppingBag,
-    Stethoscope,
-    Tag,
-    Users,
-    Utensils,
+  Baby,
+  Bus,
+  Car,
+  ChevronDown,
+  CircleDashed,
+  Dumbbell,
+  GraduationCap,
+  Home,
+  Laptop,
+  Phone,
+  Plane,
+  Receipt,
+  Scissors,
+  Shield,
+  Shirt,
+  ShoppingBag,
+  Stethoscope,
+  Tag,
+  Users,
+  Utensils,
 } from "lucide-react-native";
 import React, { useState } from "react";
 import { Modal, Pressable, Text, TouchableOpacity } from "react-native";
@@ -119,11 +119,15 @@ const CATEGORY_OPTIONS = [
 
 export default function CategorySelector() {
   const [modalVisible, setModalVisible] = useState(false);
-  const {category,setCategory} = useExpenseContext();
-  const [selected, setSelected] = useState(category || "");
-  const handleSelect = (item) => {
-    setSelected(item);
-    setCategory(item);
+  const { transaction, setTransaction } = useExpenseContext();
+
+  const selected = transaction.category || "";
+
+  const handleSelect = (value) => {
+    setTransaction((prev) => ({
+      ...prev,
+      category: value,
+    }));
     setModalVisible(false);
   };
 
@@ -163,17 +167,14 @@ export default function CategorySelector() {
                   key={value}
                   onPress={() => handleSelect(value)}
                   className="w-[30%] h-24 m-1  rounded-lg bg-white  items-center gap-1 shadow shadow-blue"
-                  
                 >
                   <View
-                    // backgroundColor="#DBEAFE"
                     rounded={30}
                     width="$full"
                     height="$full"
                     justifyContent="center"
                     alignItems="center"
                     className=" rounded-lg w-full h-full items-center gap-1 "
-                    
                   >
                     <Icon color="#3b82f6" size={30} strokeWidth={1} />
                     <Text className="text-sm  text-center" >

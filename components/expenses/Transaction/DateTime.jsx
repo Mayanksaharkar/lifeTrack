@@ -3,15 +3,25 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { Calendar, Clock } from "lucide-react-native";
 import React, { useState } from "react";
 import { Pressable, Text, View } from "react-native";
+
 export default function DateTimeDisplay() {
-  const { dateTime, setDateTime } = useExpenseContext();
+  const { transaction, setTransaction } = useExpenseContext();
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
+
+  // Defensive fallback for dateTime
+  const dateTime = transaction.dateTime || {
+    date: new Date().toISOString().split("T")[0],
+    time: new Date().toTimeString().split(":").slice(0, 2).join(":"),
+  };
 
   const handleDateChange = (event, selectedDate) => {
     if (event.type === "set" && selectedDate) {
       const isoDate = selectedDate.toISOString().split("T")[0]; // 'YYYY-MM-DD'
-      setDateTime((prev) => ({ ...prev, date: isoDate }));
+      setTransaction((prev) => ({
+        ...prev,
+        dateTime: { ...dateTime, date: isoDate },
+      }));
     }
     setShowDatePicker(false);
   };
@@ -20,7 +30,10 @@ export default function DateTimeDisplay() {
     if (event.type === "set" && selectedTime) {
       const hours = selectedTime.getHours().toString().padStart(2, "0");
       const minutes = selectedTime.getMinutes().toString().padStart(2, "0");
-      setDateTime((prev) => ({ ...prev, time: `${hours}:${minutes}` }));
+      setTransaction((prev) => ({
+        ...prev,
+        dateTime: { ...dateTime, time: `${hours}:${minutes}` },
+      }));
     }
     setShowTimePicker(false);
   };

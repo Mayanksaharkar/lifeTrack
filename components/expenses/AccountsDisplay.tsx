@@ -16,7 +16,6 @@ export default function AccountsDisplay() {
         {accounts.map((account) => (
           <AccountCard
             key={account.name}
-            icon={account.icon}
             title={account.name}
             balance={account.balance.toString()}
             onEdit={() => handleEdit(account.id)}
