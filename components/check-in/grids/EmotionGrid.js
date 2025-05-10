@@ -48,9 +48,11 @@ export default function EmotionGrid() {
 
 
   return (
-    <SelectableIconGrid items={emotions} title="Emotions" />
-    
-
+    <SelectableIconGrid 
+      title="How are you feeling?"
+      items={emotions}
+      gridType="emotions"
+    />
 
   );
 }

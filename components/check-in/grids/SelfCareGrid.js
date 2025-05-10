@@ -13,8 +13,10 @@ const selfCare = [
 ];
 export default function SelfCareGrid() {
     return (
-        <SelectableIconGrid
-            title="Self care"
-            items={selfCare} />
+        <SelectableIconGrid 
+        title="Self Care"
+        items={selfCare}
+        gridType="selfCare"
+      />
     );
 }

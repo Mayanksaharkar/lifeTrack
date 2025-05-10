@@ -1,13 +1,12 @@
 import { HapticTab } from "@/components/HapticTab";
 import TabBarBackground from "@/components/ui/TabBarBackground";
+import { useAuth } from "@/context/AuthContext";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { StyledProvider } from "@gluestack-style/react";
 import { config as UIConfig } from "@gluestack-ui/config";
 import { OverlayProvider } from "@gluestack-ui/overlay";
 import { Box, Button, Text } from "@gluestack-ui/themed";
-import { useEffect } from "react";
 import { router, Tabs } from "expo-router";
-import { useAuth } from "@/context/AuthContext";
 import {
   ChartArea,
   HomeIcon,
@@ -15,7 +14,7 @@ import {
   Sparkles,
   Wallet,
 } from "lucide-react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { Platform } from "react-native";
 export default function TabLayout() {
   const colorScheme = useColorScheme();

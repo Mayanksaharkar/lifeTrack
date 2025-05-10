@@ -1,14 +1,14 @@
 import {
-  House,
-  School,
-  Laptop,
-  Utensils,
   Coffee,
-  ShoppingBag,
-  TicketsPlane,
-  Projector,
   Dumbbell,
+  House,
+  Laptop,
+  Projector,
+  School,
+  ShoppingBag,
   Shrub,
+  TicketsPlane,
+  Utensils,
   Volleyball
 } from 'lucide-react-native';
 import SelectableIconGrid from '../SelectableIconGrid';
@@ -28,8 +28,10 @@ const events = [
 ];
 export default function EventsGrid() {
   return (
-    <SelectableIconGrid
-      title="Events"
-      items={events} />
+    <SelectableIconGrid 
+    title="Events"
+    items={events}
+    gridType="events"
+  />
   );
 }

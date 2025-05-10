@@ -1,7 +1,7 @@
 import { Box, HStack, Pressable, Text } from "@gluestack-ui/themed";
 import { Angry, Frown, Laugh, Meh, Smile } from "lucide-react-native";
 import { useState } from "react";
-
+import { useCheckIn } from "../../context/CheckInContext"
 const moods = [
   { icon: Angry, label: "Awful" },
   { icon: Frown, label: "Bad" },
@@ -11,8 +11,8 @@ const moods = [
 ];
 
 export default function MoodSelector() {
-  const [selected, setSelected] = useState(null);
-
+  const {checkInData , setMood} = useCheckIn();
+  const selected = checkInData.mood.index;
   return (
     <Box className="bg-white p-4 rounded-2xl mx-4 mb-2  mt-4">
       <Text className="text-lg font-semibold text-center mb-3">
@@ -24,7 +24,7 @@ export default function MoodSelector() {
           return (
             <Pressable
               key={index}
-              onPress={() => setSelected(index)}
+              onPress={() => setMood(index, label)}
               padding={11}
               className="items-center"
               // backgroundColor={isActive ? "#3b82f6" : "#f3f4f6"}

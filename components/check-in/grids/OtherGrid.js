@@ -16,8 +16,10 @@ const other = [
 ];
 export default function OtherGrid() {
   return (
-    <SelectableIconGrid
-      title="Other"
-      items={other} />
+    <SelectableIconGrid 
+    title="Other"
+    items={other}
+    gridType="other"
+  />
   );
 }

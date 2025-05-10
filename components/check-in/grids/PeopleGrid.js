@@ -12,8 +12,10 @@ const people = [
 ];
 export default function PeopleGrid() {
   return (
-    <SelectableIconGrid
-      title="People"
-      items={people} />
+    <SelectableIconGrid 
+    title="Who were you with?"
+    items={people}
+    gridType="people"
+  />
   );
 }

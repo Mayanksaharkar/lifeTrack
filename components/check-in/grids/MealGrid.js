@@ -5,7 +5,7 @@ import {
   Soup
 } from 'lucide-react-native';
 import SelectableIconGrid from '../SelectableIconGrid';
-const meal = [
+const meals = [
   { label: 'Breakfast', icon: Sandwich },
   { label: 'Lunch', icon: Soup },
   { label: 'Dinner', icon: HandPlatter },
@@ -13,8 +13,10 @@ const meal = [
 ];
 export default function MealGrid() {
   return (
-    <SelectableIconGrid
-      title="Meal"
-      items={meal} />
+    <SelectableIconGrid 
+      title="What did you eat?"
+      items={meals}
+      gridType="meals"
+    />
   );
 }
