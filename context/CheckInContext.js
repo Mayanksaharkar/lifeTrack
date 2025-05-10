@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useCallback, useContext, useMemo, useState } from "react";
 import { uploadImage } from '../utils/imageStorage';
 
 const initialCheckInData = {
@@ -67,7 +67,7 @@ export function CheckInProvider({ children }) {
     }
   };
 
-  const setGridSelection = (gridType, selections) => {
+  const setGridSelection = useCallback((gridType, selections) => {
     setCheckInData((prev) => ({
       ...prev,
       grids: {
@@ -75,13 +75,13 @@ export function CheckInProvider({ children }) {
         [gridType]: selections,
       },
     }));
-  };
+  }, []);
 
   const resetCheckIn = () => {
     setCheckInData(initialCheckInData);
   };
 
-  const value = {
+  const value = useMemo(() => ({
     checkInData,
     setMood,
     setNotes,
@@ -90,7 +90,7 @@ export function CheckInProvider({ children }) {
     resetCheckIn,
     isSubmitting,
     setIsSubmitting,
-  };
+  }), [checkInData, isSubmitting, setGridSelection]);
 
   return (
     <CheckInContext.Provider value={value}>{children}</CheckInContext.Provider>

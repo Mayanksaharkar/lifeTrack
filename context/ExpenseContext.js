@@ -6,21 +6,13 @@ import {
   PiggyBank,
 } from "lucide-react-native";
 import { createContext, useContext, useState } from "react";
+
 const ExpenseContext = createContext({
   handleSave: () => {},
 });
 
 export const ExpenseProvider = ({ children }) => {
   const router = useRouter();
-  const [newStateVariable, setNewStateVariable] = useState(null);
-
-  //***************************************************************************************************************** */
-  // Transaction Screen
-
-  const handleSave = () => {
-    console.log({ entryType, account, category, notes, amount, dateTime });
-    router.push("/expenses");
-  };
   const [entryType, setEntryType] = useState("EXPENSE");
   const [accountType, setAccountType] = useState("");
   const [category, setCategory] = useState(null);
@@ -30,6 +22,44 @@ export const ExpenseProvider = ({ children }) => {
     date: new Date().toISOString().split("T")[0],
     time: new Date().toTimeString().split(":").slice(0, 2).join(":"),
   });
+
+  const handleSave = () => {
+    try {
+      // Log all the data
+      const transactionData = {
+        entryType,
+        accountType,
+        category,
+        notes,
+        amount,
+        dateTime
+      };
+      
+      console.log("Saving transaction with data:", transactionData);
+      
+      // Validate required fields
+      if (!amount || amount === "0") {
+        console.warn("Amount is required and must be greater than 0");
+        return;
+      }
+      
+      if (!accountType) {
+        console.warn("Account type is required");
+        return;
+      }
+      
+      if (!category) {
+        console.warn("Category is required");
+        return;
+      }
+      
+      // Here you would typically save to a database or storage
+      // For now, we'll just navigate back
+      router.push("/expenses");
+    } catch (error) {
+      console.error("Error saving transaction:", error);
+    }
+  };
 
   //***************************************************************************************************************** */
   //expense screen
@@ -65,7 +95,6 @@ export const ExpenseProvider = ({ children }) => {
       });
       setAccModalVisible(true);
     }
-    console.log("Edit account with id:", id);
   };
 
   const handleAccountAdd = (newAccount) => {
@@ -80,39 +109,44 @@ export const ExpenseProvider = ({ children }) => {
     });
   };
 
+  const contextValue = {
+    handleSave,
+    entryType,
+    setEntryType,
+    accountType,
+    setAccountType,
+    category,
+    setCategory,
+    notes,
+    setNotes,
+    amount,
+    setAmount,
+    dateTime,
+    setDateTime,
+    accounts,
+    setAccount,
+    accModalVisible,
+    setAccModalVisible,
+    newAccount,
+    setNewAccount,
+    handleDelete,
+    handleEdit,
+    handleAccountAdd,
+  };
+
   return (
-    <ExpenseContext.Provider
-      value={{
-        handleSave,
-        newStateVariable,
-        setNewStateVariable,
-        entryType,
-        setEntryType,
-        accountType,
-        setAccountType,
-        category,
-        setCategory,
-        notes,
-        setNotes,
-        amount,
-        setAmount,
-        dateTime,
-        setDateTime,
-        accounts,
-        setAccount,
-        accModalVisible,
-        setAccModalVisible,
-        newAccount,
-        setNewAccount,
-        handleDelete,
-        handleEdit,
-        handleAccountAdd,
-      }}
-    >
+    <ExpenseContext.Provider value={contextValue}>
       {children}
     </ExpenseContext.Provider>
   );
 };
 
-export const useExpenseContext = () => useContext(ExpenseContext);
+export const useExpenseContext = () => {
+  const context = useContext(ExpenseContext);
+  if (context === undefined) {
+    throw new Error('useExpenseContext must be used within an ExpenseProvider');
+  }
+  return context;
+};
+
 export default ExpenseContext;

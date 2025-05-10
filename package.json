@@ -8,7 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "bundle-size": "expo export --no-minify && node scripts/analyze-bundle.js"
   },
   "dependencies": {
     "@expo/html-elements": "^0.4.2",
@@ -16,7 +17,6 @@
     "@gluestack-style/react": "^1.0.57",
     "@gluestack-ui/actionsheet": "^0.2.53",
     "@gluestack-ui/config": "^1.1.20",
-    
     "@gluestack-ui/icon": "^0.1.27",
     "@gluestack-ui/menu": "^0.2.43",
     "@gluestack-ui/nativewind-utils": "^1.0.26",
@@ -32,8 +32,6 @@
     "@react-navigation/elements": "^2.3.8",
     "@react-navigation/native": "^7.1.8",
     "@react-navigation/native-stack": "^7.3.12",
-    "date-fns": "^4.1.0",
-    "dayjs": "^1.11.13",
     "expo": "^53.0.9",
     "expo-blur": "~14.1.4",
     "expo-constants": "~17.1.6",
@@ -43,7 +41,7 @@
     "expo-image-picker": "^16.1.4",
     "expo-linking": "~7.1.4",
     "expo-router": "~5.0.6",
-    "expo-splash-screen": "~0.30.8",
+    "expo-splash-screen": "^0.30.8",
     "expo-status-bar": "~2.2.3",
     "expo-symbols": "~0.4.4",
     "expo-system-ui": "~5.0.7",
@@ -65,9 +63,7 @@
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "~0.20.0",
     "react-native-webview": "13.13.5",
-    "styled-components": "^6.1.17",
-    "tailwindcss": "^3.4.17",
-    "twrnc": "^4.7.0"
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

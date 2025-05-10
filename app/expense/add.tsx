@@ -8,24 +8,20 @@ import CategorySelector from '../../components/expenses/Transaction/CategorySele
 import DateTimeDisplay from '../../components/expenses/Transaction/DateTime';
 import NotesInput from '../../components/expenses/Transaction/NoteInput';
 import TypeSelector from '../../components/expenses/Transaction/TypeSelector';
-import { ExpenseProvider } from '../../context/ExpenseContext';
 
 export default function AddTransactionScreen() {
- 
-
   return (
-    <ExpenseProvider>
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1 justify-between p-4 mb-10">
         <ScrollView showsVerticalScrollIndicator={false}>
           <Box>
-            <TypeSelector  />
+            <TypeSelector />
             <View className="flex-row justify-between mt-4">
-              <AccSelector  />
+              <AccSelector />
               <CategorySelector />
             </View>
             <NotesInput />
-            <AmountPad  />
+            <AmountPad />
           </Box>
         </ScrollView>
         <View>
@@ -33,6 +29,5 @@ export default function AddTransactionScreen() {
         </View>
       </View>
     </SafeAreaView>
-    </ExpenseProvider>
   );
 }
