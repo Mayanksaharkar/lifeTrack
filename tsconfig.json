@@ -18,5 +18,5 @@
     "constants",
     "nativewind-env.d.ts",
     "context"
-  ]
+, "firebaseConfig.js"  ]
 }

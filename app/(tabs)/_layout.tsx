@@ -5,7 +5,9 @@ import { StyledProvider } from "@gluestack-style/react";
 import { config as UIConfig } from "@gluestack-ui/config";
 import { OverlayProvider } from "@gluestack-ui/overlay";
 import { Box, Button, Text } from "@gluestack-ui/themed";
+import { useEffect } from "react";
 import { router, Tabs } from "expo-router";
+import { useAuth } from "@/context/AuthContext";
 import {
   ChartArea,
   HomeIcon,
@@ -17,6 +19,14 @@ import React from "react";
 import { Platform } from "react-native";
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+
+  const { handleLogout, isLoggedIn } = useAuth();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.replace("/authentication/login");
+    }
+  }, [isLoggedIn]);
 
   return (
     <StyledProvider config={{ ...UIConfig, colorMode: "light" }}>
@@ -49,11 +59,11 @@ export default function TabLayout() {
               headerRight: () => (
                 <Box mx="$4" flexDirection="row" alignItems="center">
                   <Button
-                    onPress={() => {
-                      router.push("/authentication/login");
-                    }}
+                    onPress={async () => {
+                      await handleLogout();
+                      }}
                   >
-                    <Text>Login</Text>
+                    <Text>Logout</Text>
                   </Button>
                 </Box>
               ),
