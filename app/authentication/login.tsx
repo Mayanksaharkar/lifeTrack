@@ -2,14 +2,17 @@ import { useAuth } from "@/context/AuthContext";
 import {
   Box,
   Button,
-  Center,
   FormControl,
   Heading,
   Input,
   InputField,
+  InputIcon,
   Text,
+  View,
   VStack,
 } from "@gluestack-ui/themed";
+import { Lock, Mail } from "lucide-react-native";
+
 import { router } from "expo-router";
 import { Eye, EyeOff } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
@@ -38,18 +41,19 @@ export default function LoginScreen() {
   }, [isLoggedIn]);
 
   return (
-    <Center flex={1} className="px-4 bg-white">
-      <Box className="bg-white p-6 rounded-2xl   w-full max-w-sm">
-        <Heading size="lg" className="text-center mb-4">
+    <View flex={1} className=" h-screen justify-center items-center px-4">
+      <Box className="bg-white p-8 rounded-3xl w-full max-w-md shadow-2xl ">
+        <Heading size="xl" className="text-center text-blue-700 mb-6">
           Login
         </Heading>
 
-        <VStack space="md">
+        <VStack space="lg">
           <FormControl>
             <Text className="mb-1 text-gray-700">Email</Text>
-            <Input className="border border-gray-300 rounded-md">
+            <Input className="border border-blue-300 bg-blue-50 rounded-2xl items-center pl-4">
+              <InputIcon as={Mail} color="$blue500" />
               <InputField
-                className="px-3 py-2"
+                className="px-3 py-2 text-blue-900"
                 placeholder="Enter your email"
                 value={user.email}
                 onChangeText={(text) => handleInputChange("email", text)}
@@ -60,9 +64,10 @@ export default function LoginScreen() {
 
           <FormControl>
             <Text className="mb-1 text-gray-700">Password</Text>
-            <Input className="border border-gray-300 rounded-md">
+            <Input className="border border-blue-300 bg-blue-50 rounded-2xl items-center pl-4">
+              <InputIcon as={Lock} color="$blue500" />
               <InputField
-                className="px-3 py-2 pr-10"
+                className="px-3 py-2 text-blue-900 pr-10"
                 placeholder="Enter your password"
                 secureTextEntry={!showPassword}
                 value={user.password}
@@ -70,38 +75,45 @@ export default function LoginScreen() {
               />
               <Pressable
                 onPress={togglePasswordVisibility}
-                style={{ position: "absolute", right: 10, top: 10 }}
+                style={{ position: "absolute", right: 10, top: 12 }}
               >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                {showPassword ? (
+                  <EyeOff size={20} color="#1D4ED8" />
+                ) : (
+                  <Eye size={20} color="#1D4ED8" />
+                )}
               </Pressable>
             </Input>
           </FormControl>
 
-          {error && <Text className="text-red-600 mt-1">{error}</Text>}
+          {error ? (
+            <Text className="text-red-600 text-sm mt-1">{error}</Text>
+          ) : null}
 
           <Button
             onPress={handleLoginPress}
             isDisabled={loading}
-            className="mt-4 bg-blue-600 rounded-md"
+            className="mt-4 bg-blue-600 rounded-2xl py-3 shadow-md"
           >
-            <Text className="text-white text-center w-full">
+            <Text
+              className=" text-center font-semibold text-base"
+              color="$white"
+            >
               {loading ? "Logging In..." : "Login"}
             </Text>
           </Button>
 
-          <Text className="mt-4 text-center text-gray-500">
+          <Text className="text-center text-gray-500 mt-4">
             Don't have an account?{" "}
             <Text
               className="text-blue-600 font-bold"
-              onPress={() => {
-                router.push("/authentication/register");
-              }}
+              onPress={() => router.push("/authentication/register")}
             >
               Sign Up
             </Text>
           </Text>
         </VStack>
       </Box>
-    </Center>
+    </View>
   );
 }
