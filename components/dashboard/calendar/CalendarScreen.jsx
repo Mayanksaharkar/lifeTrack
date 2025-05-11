@@ -109,7 +109,7 @@ const CalendarScreen = () => {
           </TouchableOpacity>
         </HStack>
 
-        <View className="bg-white rounded-2xl shadow-md overflow-hidden">
+        <View className="bg-white rounded-2xl   overflow-hidden">
           <Calendar
             markingType="period"
             markedDates={getMarkedDates()}

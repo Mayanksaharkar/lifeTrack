@@ -13,10 +13,10 @@ export default function ActionButtons() {
 
   return (
     <HStack space="md" px="$4" py="$2" >
-      <Button variant="solid" className='shadow'  minHeight={60} borderRadius={10}  bgColor='$blue300' flex={1} onPress={handleCaptureDayClick}>
+      <Button variant="solid" className=' '  minHeight={60} borderRadius={10}  bgColor='$blue300' flex={1} onPress={handleCaptureDayClick}>
         <ButtonText fontWeight={'$extrabold'} >+ Capture Day</ButtonText>
       </Button>
-      <Button variant="solid"  className='shadow ' minHeight={60} bgColor='$green300' borderRadius={10} flex={1} onPress={handleExpensesClick}>
+      <Button variant="solid"  className='  ' minHeight={60} bgColor='$green300' borderRadius={10} flex={1} onPress={handleExpensesClick}>
         <ButtonText fontWeight={'$extrabold'}>+ Add Expense</ButtonText>
       </Button>
     </HStack>

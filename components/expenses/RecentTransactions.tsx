@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import TransactionItem from './TransactionItem';
 export default function RecentTransactions() {
   return (
-    <VStack space="sm" className="bg-white p-4 rounded-2xl shadow-md my-4">
+    <VStack space="sm" className="bg-white p-4 rounded-2xl   my-4">
       <Text className=" text-lg mb-2 font-bold" >Recent Transactions</Text>
 
       <TransactionItem account='Cash'  label="Coffee shop" date="Today, 9:15 AM" amount="50" />

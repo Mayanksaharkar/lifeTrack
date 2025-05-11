@@ -1,9 +1,9 @@
-import { Button, Box, Input, InputField, Text, VStack } from '@gluestack-ui/themed';
+import { Box, Button, Input, InputField, Text, VStack } from '@gluestack-ui/themed';
 import CategorySelect from './CategorySelect';
 
 export default function AddExpenseForm() {
   return (
-    <VStack space="md" className="bg-white p-4 rounded-2xl shadow-md">
+    <VStack space="md" className="bg-white p-4 rounded-2xl  ">
       <Text className="font-bold " fontSize={20} fontWeight={'$semibold'}>Add Expense</Text>
 
       <VStack>

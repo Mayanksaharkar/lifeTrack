@@ -166,7 +166,7 @@ export default function CategorySelector() {
                 <TouchableOpacity
                   key={value}
                   onPress={() => handleSelect(value)}
-                  className="w-[30%] h-24 m-1  rounded-lg bg-white  items-center gap-1 shadow shadow-blue"
+                  className="w-[30%] h-24 m-1  rounded-lg bg-white  items-center gap-1    -blue"
                 >
                   <View
                     rounded={30}

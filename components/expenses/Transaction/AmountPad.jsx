@@ -25,14 +25,14 @@ export default function AmountPad() {
   };
 
   return (
-    <View className="mt-6 p-3 bg-white  rounded-xl shadow shadow-black mx-2">
+    <View className="mt-6 p-3 bg-white  rounded-xl     mx-2">
       <Text className="text-center text-4xl text-blue  py-3 rounded-md border-blue/50 border-2 font-bold mb-4">{amount}</Text>
       <View className="flex-wrap flex-row justify-center">
         {padKeys.map((key, index) => (
           <TouchableOpacity
             key={index}
             onPress={() => handlePress(key)}
-            className="w-[30%] m-[1.5%] p-4 bg-white shadow shadow-blue  rounded-xl items-center"
+            className="w-[30%] m-[1.5%] p-4 bg-white    -blue  rounded-xl items-center"
           >
             <Text className="text-2xl text-blue">{key}</Text>
           </TouchableOpacity>

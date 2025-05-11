@@ -1,12 +1,12 @@
 import {
   Box,
   Button,
+  Center,
   Input,
   InputField,
   InputIcon,
   Text,
   VStack,
-  Center,
 } from "@gluestack-ui/themed";
 import { Lock, Mail, User } from "lucide-react-native";
 import React, { useState } from "react";
@@ -23,7 +23,7 @@ export default function RegisterScreen() {
 
   return (
     <Center flex={1} className="px-4 bg-white">
-      <Box className="px-6 py-6 bg-white rounded-2xl shadow-md w-[90%] self-center mt-10">
+      <Box className="px-6 py-6 bg-white rounded-2xl   w-[90%] self-center mt-10">
         <VStack space="lg">
           <Input className="border border-gray-300 rounded-xl">
             <InputIcon as={User} />

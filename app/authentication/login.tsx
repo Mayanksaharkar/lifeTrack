@@ -39,7 +39,7 @@ export default function LoginScreen() {
 
   return (
     <Center flex={1} className="px-4 bg-white">
-      <Box className="bg-white p-6 rounded-2xl shadow-md w-full max-w-sm">
+      <Box className="bg-white p-6 rounded-2xl   w-full max-w-sm">
         <Heading size="lg" className="text-center mb-4">
           Login
         </Heading>

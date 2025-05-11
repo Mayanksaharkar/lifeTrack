@@ -24,7 +24,7 @@ useEffect(() => {
         <View className="w-full max-w-md space-y-10">
         
           <View className="items-center space-y-4">
-            <View className="bg-indigo-100 p-5 rounded-full shadow-lg">
+            <View className="bg-indigo-100 p-5 rounded-full  ">
               <TrendingUp color="#4F46E5" size={48} />
             </View>
             <Text className="text-3xl font-bold text-gray-800 text-center">
@@ -37,7 +37,7 @@ useEffect(() => {
 
           <View className="flex-row justify-between w-full py-6 px-4">
             <View className="items-center space-y-3">
-              <View className="bg-blue-100 p-4 rounded-full shadow-md">
+              <View className="bg-blue-100 p-4 rounded-full  ">
                 <Calendar color="#3B82F6" size={28} />
               </View>
               <Text className="text-sm font-medium text-gray-700 text-center">
@@ -46,7 +46,7 @@ useEffect(() => {
             </View>
 
             <View className="items-center space-y-3">
-              <View className="bg-green-100 p-4 rounded-full shadow-md">
+              <View className="bg-green-100 p-4 rounded-full  ">
                 <BarChart2 color="#10B981" size={28} />
               </View>
               <Text className="text-sm font-medium text-gray-700 text-center">
@@ -55,7 +55,7 @@ useEffect(() => {
             </View>
 
             <View className="items-center space-y-3">
-              <View className="bg-purple-100 p-4 rounded-full shadow-md">
+              <View className="bg-purple-100 p-4 rounded-full  ">
                 <TrendingUp color="#8B5CF6" size={28} />
               </View>
               <Text className="text-sm font-medium text-gray-700 text-center">
@@ -66,7 +66,7 @@ useEffect(() => {
 
           <View className="space-y-5 w-full mt-8">
             <TouchableOpacity
-              className="px-6 py-4 w-full bg-indigo-600 rounded-lg shadow-md"
+              className="px-6 py-4 w-full bg-indigo-600 rounded-lg  "
               onPress={() => router.push("/authentication/login")}
             >
               <View className="flex-row items-center justify-center space-x-3">
@@ -78,7 +78,7 @@ useEffect(() => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              className="px-6 py-4 w-full border-2 border-indigo-600 rounded-lg bg-white shadow-md"
+              className="px-6 py-4 w-full border-2 border-indigo-600 rounded-lg bg-white  "
               onPress={() => router.push("/authentication/register")}
             >
               <View className="flex-row items-center justify-center space-x-3">

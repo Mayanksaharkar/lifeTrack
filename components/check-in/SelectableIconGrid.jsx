@@ -12,7 +12,7 @@ const IconItem = memo(({ Icon, label, active, onPress }) => (
       rounded={30}
       backgroundColor={active ? '#3b82f6' : '#f3f4f6'}
       padding={15}
-      className='shadow shadow-black'
+      className='   '
     >
       <Icon size={24} color={active ? '#f3f4f6' : '#3b82f6'} />
     </Box>

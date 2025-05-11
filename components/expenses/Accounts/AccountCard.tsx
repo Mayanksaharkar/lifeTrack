@@ -5,9 +5,9 @@ import {
   MenuSeparator,
 } from "@/components/ui/menu";
 import { Box, HStack, Icon, Text, VStack } from "@gluestack-ui/themed";
-import { Pressable, Alert } from "react-native";
+import { Alert, Pressable } from "react-native";
 
-import { Edit3, LucideIcon, MoreVertical, Trash2 } from "lucide-react-native";
+import { Edit3, MoreVertical, Trash2 } from "lucide-react-native";
 import React from "react";
 
 interface AccountCardProps {
@@ -40,7 +40,7 @@ const AccountCard = ({
     <Box className="border border-gray rounded-lg px-4 py-3 mb-2 bg-white">
       <HStack justifyContent="space-between" alignItems="center">
         <HStack space="md" alignItems="center">
-          <Box className="p-5 shadow shadow-black bg-blue" rounded="$full">
+          <Box className="p-5     bg-blue" rounded="$full">
             {/* <Icon as={IconComponent} size="md" color="$white" /> */}
           </Box>
           <VStack>
@@ -53,7 +53,7 @@ const AccountCard = ({
           <Menu
             placement="bottom right"
             offset={8}
-            className="bg-white shadow-lg rounded-lg"
+            className="bg-white   rounded-lg"
             trigger={({ ...triggerProps }) => {
               return <Icon as={MoreVertical} size="xl" {...triggerProps} />;
             }}

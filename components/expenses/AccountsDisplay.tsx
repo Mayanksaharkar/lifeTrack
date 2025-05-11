@@ -7,7 +7,7 @@ import AddAccButton from "./Accounts/AddAccButton";
 export default function AccountsDisplay() {
  const {accounts,handleAccountAdd,handleEdit,handleDelete} = useExpenseContext();
   return (
-    <ScrollView className="bg-white shadow-black shadow  rounded-2xl mb-10 flex-1 px-4 py-6">
+    <ScrollView className="bg-white      rounded-2xl mb-10 flex-1 px-4 py-6">
       <VStack space="md">
         <Text className="text-lg mb-2" color={"$black"} fontWeight={"$bold"}>
           Accounts

@@ -15,7 +15,7 @@ export default function DashboardScreen() {
       >
         <View className="space-y-6">
           <View className="space-y-4">
-            <View className="shadow-black">
+            <View className=" ">
               <Header />
             </View>
             <SummaryCard />
