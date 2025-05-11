@@ -32,6 +32,8 @@ export default function TabLayout() {
           screenOptions={{
             tabBarActiveTintColor: "#3b82f6",
             headerShown: true,
+            animation: "shift",
+
             tabBarButton: HapticTab,
             tabBarBackground: TabBarBackground,
             tabBarStyle: Platform.select({
