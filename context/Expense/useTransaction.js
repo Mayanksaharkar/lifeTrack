@@ -1,7 +1,15 @@
-import { doc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
+
 import { useState } from "react";
 import { db } from "../../firebaseConfig";
-
+import { navigate } from "expo-router/build/global-state/routing";
 export const useTransaction = (
   user,
   router,
@@ -9,6 +17,7 @@ export const useTransaction = (
   fetchAccounts = () => {}
 ) => {
   const [transaction, setTransaction] = useState({
+    userId: user?.uid,
     entryType: "EXPENSE",
     accountType: "",
     category: null,
@@ -19,6 +28,8 @@ export const useTransaction = (
       time: new Date().toTimeString().split(":").slice(0, 2).join(":"),
     },
   });
+
+  const [transactionDisplay, setTransactionDisplay] = useState([]);
 
   const resetTransaction = () => {
     setTransaction({
@@ -53,7 +64,6 @@ export const useTransaction = (
 
     return null;
   };
-
   const handleSave = async () => {
     const error = validateTransaction();
     if (error) {
@@ -65,8 +75,19 @@ export const useTransaction = (
       transaction;
     const accountObj = accounts.find((acc) => acc.name === accountType);
 
+    // Prevent negative balance for EXPENSE
+    if (
+      entryType === "EXPENSE" &&
+      accountObj &&
+      parseFloat(accountObj.balance || 0) - parseFloat(amount) < 0
+    ) {
+      alert("Insufficient funds. Account balance cannot go negative.");
+      return;
+    }
+
     try {
       await setDoc(doc(db, "transactions", `${Date.now()}`), {
+        userId: user?.uid,
         entryType,
         accountType,
         category,
@@ -97,6 +118,7 @@ export const useTransaction = (
       alert("Transaction saved successfully");
       fetchAccounts(user?.uid);
       resetTransaction();
+
       router.push("/expenses");
     } catch (err) {
       console.error("Error saving transaction:", err);
@@ -104,9 +126,80 @@ export const useTransaction = (
     }
   };
 
+  const fetchTransactions = async () => {
+    try {
+      if (!user?.uid) {
+        setTransactionDisplay([]);
+        return;
+      }
+      // Fetch all transactions for the user
+      const transactionsQuery = query(
+        collection(db, "transactions"),
+        where("userId", "==", user.uid)
+      );
+      const querySnapshot = await getDocs(transactionsQuery);
+      const transactionsData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setTransactionDisplay(transactionsData);
+    } catch (error) {
+      console.error("Error fetching transactions:", error);
+    }
+  };
+
+  const onDelete = async (id) => {
+    try {
+      await setDoc(doc(db, "transactions", id), {
+        isDeleted: true,
+      });
+      alert("Transaction deleted successfully");
+      fetchTransactions();
+    } catch (error) {
+      console.error("Error deleting transaction:", error);
+      alert("Failed to delete transaction.");
+    }
+  };
+  const onEdit = async (id) => {
+    try {
+      const transactionToEdit = transactionDisplay.find(
+        (transaction) => transaction.id === id
+      );
+      if (transactionToEdit) {
+        setTransaction({
+          ...transactionToEdit,
+          dateTime: {
+            date: transactionToEdit.dateTime.date,
+            time: transactionToEdit.dateTime.time,
+          },
+        });
+        navigate("/expense/add");
+      }
+
+
+
+      await setDoc(
+        doc(db, "transactions", id),
+        {
+          isEdited: true,
+        },
+        { merge: true }
+      );
+      
+      fetchTransactions();
+    } catch (error) {
+      console.error("Error editing transaction:", error);
+      alert("Failed to edit transaction.");
+    }
+  };
+
   return {
     transaction,
     setTransaction,
     handleSave,
+    transactionDisplay,
+    fetchTransactions,
+    onDelete,
+    onEdit,
   };
 };

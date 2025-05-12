@@ -1,21 +1,20 @@
-import { useExpenseContext } from '@/context/ExpenseContext';
-import { ChevronDown, Wallet } from 'lucide-react-native';
-import React, { useState } from 'react';
-import {
-  Modal,
-  Pressable,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-
+import { useExpenseContext } from "@/context/ExpenseContext";
+import { ChevronDown, Wallet } from "lucide-react-native";
+import React, { use, useState } from "react";
+import { Modal, Pressable, Text, TouchableOpacity, View } from "react-native";
+import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
 export default function AccSelector() {
-  const { accounts, transaction, setTransaction } = useExpenseContext();
+  const { accounts, transaction, setTransaction, fetchAccounts } = useExpenseContext();
   const [modalVisible, setModalVisible] = useState(false);
+  const { user } = useAuth();
 
+  useEffect(() => {
+    fetchAccounts();
+  }, [user]);
 
   // Use the selected account from transaction context
-  const selected = transaction.accountType || '';
+  const selected = transaction.accountType || "";
 
   const handleSelect = (item) => {
     setTransaction((prev) => ({
@@ -34,7 +33,7 @@ export default function AccSelector() {
         <View className="flex-row items-center space-x-2 gap-1">
           <Wallet color="#3b82f6" size={20} />
           <Text className="text-blue font-semibold">
-            {selected || 'Select Account'}
+            {selected || "Select Account"}
           </Text>
         </View>
         <ChevronDown color="#3b82f6" size={16} />
@@ -65,7 +64,9 @@ export default function AccSelector() {
                 </TouchableOpacity>
               ))
             ) : (
-              <Text className="text-center text-gray-400">No accounts found</Text>
+              <Text className="text-center text-gray-400">
+                No accounts found
+              </Text>
             )}
           </View>
         </Pressable>

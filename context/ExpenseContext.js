@@ -22,15 +22,18 @@ export const ExpenseProvider = ({ children }) => {
     fetchAccounts,
   } = useAccountManager(user);
 
-  const { transaction, setTransaction, handleSave } = useTransaction(
-    user,
-    router,
-    accounts,
-    fetchAccounts
-  );
+  const {
+    transaction,
+    setTransaction,
+    handleSave,
+    transactionDisplay,
+    fetchTransactions,
+    onDelete,
+    onEdit,
+  } = useTransaction(user, router, accounts, fetchAccounts);
 
   useEffect(() => {
-    if (user) fetchAccounts(user.uid);
+    if (user) fetchAccounts();
   }, [user]);
 
   return (
@@ -49,6 +52,10 @@ export const ExpenseProvider = ({ children }) => {
         handleEdit,
         handleAccountAdd,
         fetchAccounts,
+        fetchTransactions,
+        transactionDisplay,
+        onDelete,
+        onEdit,
       }}
     >
       {children}

@@ -1,5 +1,7 @@
-import { useExpenseContext } from "@/context/ExpenseContext";
+import React, { useState } from "react";
+import { Modal, Pressable, Text, TouchableOpacity } from "react-native";
 import { View } from "@gluestack-ui/themed";
+import { useExpenseContext } from "@/context/ExpenseContext";
 import {
   Baby,
   Bus,
@@ -22,99 +24,37 @@ import {
   Users,
   Utensils,
 } from "lucide-react-native";
-import React, { useState } from "react";
-import { Modal, Pressable, Text, TouchableOpacity } from "react-native";
-const CATEGORY_OPTIONS = [
-  {
-    label: "Baby",
-    value: "Baby",
-    Icon: Baby,
-  },
-  {
-    label: "Beauty",
-    value: "Beauty",
-    Icon: Scissors,
-  },
-  {
-    label: "Clothing",
-    value: "Clothing",
-    Icon: Shirt,
-  },
-  {
-    label: "Car",
-    value: "Car",
-    Icon: Car,
-  },
-  {
-    label: "Education",
-    value: "Education",
-    Icon: GraduationCap,
-  },
-  {
-    label: "Electronics",
-    value: "Electronics",
-    Icon: Laptop,
-  },
-  {
-    label: "Food",
-    value: "Food",
-    Icon: Utensils,
-  },
-  {
-    label: "Health",
-    value: "Health",
-    Icon: Stethoscope,
-  },
-  {
-    label: "Home",
-    value: "Home",
-    Icon: Home,
-  },
-  {
-    label: "Insurance",
-    value: "Insurance",
-    Icon: Shield,
-  },
-  {
-    label: "Shopping",
-    value: "Shopping",
-    Icon: ShoppingBag,
-  },
-  {
-    label: "Sports",
-    value: "Sports",
-    Icon: Dumbbell,
-  },
-  {
-    label: "Social",
-    value: "Social",
-    Icon: Users,
-  },
-  {
-    label: "Tax",
-    value: "Tax",
-    Icon: Receipt,
-  },
-  {
-    label: "Telecom",
-    value: "Telecom",
-    Icon: Phone,
-  },
-  {
-    label: "Travel",
-    value: "Travel",
-    Icon: Plane,
-  },
-  {
-    label: "Transport",
-    value: "Transport",
-    Icon: Bus,
-  },
-  {
-    label: "Other",
-    value: "Other",
-    Icon: CircleDashed,
-  },
+
+// Expense categories
+const EXPENSE_CATEGORY_OPTIONS = [
+  { label: "Baby", value: "Baby", Icon: Baby },
+  { label: "Beauty", value: "Beauty", Icon: Scissors },
+  { label: "Clothing", value: "Clothing", Icon: Shirt },
+  { label: "Car", value: "Car", Icon: Car },
+  { label: "Education", value: "Education", Icon: GraduationCap },
+  { label: "Electronics", value: "Electronics", Icon: Laptop },
+  { label: "Food", value: "Food", Icon: Utensils },
+  { label: "Health", value: "Health", Icon: Stethoscope },
+  { label: "Home", value: "Home", Icon: Home },
+  { label: "Insurance", value: "Insurance", Icon: Shield },
+  { label: "Shopping", value: "Shopping", Icon: ShoppingBag },
+  { label: "Sports", value: "Sports", Icon: Dumbbell },
+  { label: "Social", value: "Social", Icon: Users },
+  { label: "Tax", value: "Tax", Icon: Receipt },
+  { label: "Telecom", value: "Telecom", Icon: Phone },
+  { label: "Travel", value: "Travel", Icon: Plane },
+  { label: "Transport", value: "Transport", Icon: Bus },
+  { label: "Other", value: "Other", Icon: CircleDashed },
+];
+
+// Income categories
+const INCOME_CATEGORY_OPTIONS = [
+  { label: "Salary", value: "Salary", Icon: Tag },
+  { label: "Gift", value: "Gift", Icon: Users },
+  { label: "Interest", value: "Interest", Icon: Receipt },
+  { label: "Investments", value: "Investments", Icon: Laptop },
+  { label: "Rental Income", value: "Rental Income", Icon: Home },
+  { label: "Other", value: "Other", Icon: CircleDashed },
 ];
 
 export default function CategorySelector() {
@@ -122,6 +62,12 @@ export default function CategorySelector() {
   const { transaction, setTransaction } = useExpenseContext();
 
   const selected = transaction.category || "";
+
+  // Decide category list based on transaction type
+  const categoryOptions =
+    transaction.entryType === "INCOME"
+      ? INCOME_CATEGORY_OPTIONS
+      : EXPENSE_CATEGORY_OPTIONS;
 
   const handleSelect = (value) => {
     setTransaction((prev) => ({
@@ -162,11 +108,11 @@ export default function CategorySelector() {
             </Text>
 
             <View className="flex-row flex-wrap justify-between">
-              {CATEGORY_OPTIONS.map(({ label, value, Icon }) => (
+              {categoryOptions.map(({ label, value, Icon }) => (
                 <TouchableOpacity
                   key={value}
                   onPress={() => handleSelect(value)}
-                  className="w-[30%] h-24 m-1  rounded-lg bg-white  items-center gap-1    -blue"
+                  className="w-[30%] h-24 m-1 rounded-lg bg-white items-center gap-1"
                 >
                   <View
                     rounded={30}
@@ -174,12 +120,10 @@ export default function CategorySelector() {
                     height="$full"
                     justifyContent="center"
                     alignItems="center"
-                    className=" rounded-lg w-full h-full items-center gap-1 "
+                    className="rounded-lg w-full h-full items-center gap-1"
                   >
                     <Icon color="#3b82f6" size={30} strokeWidth={1} />
-                    <Text className="text-sm  text-center" >
-                      {label}
-                    </Text>
+                    <Text className="text-sm text-center">{label}</Text>
                   </View>
                 </TouchableOpacity>
               ))}
