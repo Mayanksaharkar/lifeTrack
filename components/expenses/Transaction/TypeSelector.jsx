@@ -1,7 +1,7 @@
-import { useExpenseContext } from '@/context/ExpenseContext';
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-const types = ['INCOME', 'EXPENSE', 'TRANSFER'];
+import { useExpenseContext } from "@/context/ExpenseContext";
+import React from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+const types = ["INCOME", "EXPENSE"];
 
 export default function TypeSelector() {
   const { transaction, setTransaction } = useExpenseContext();
@@ -18,7 +18,11 @@ export default function TypeSelector() {
             }))
           }
         >
-          <Text className={`text-lg font-semibold ${transaction.entryType === type ? 'text-blue ' : 'text-gray-500'}`}>
+          <Text
+            className={`text-lg font-semibold ${
+              transaction.entryType === type ? "text-blue " : "text-gray-500"
+            }`}
+          >
             {type}
           </Text>
         </TouchableOpacity>

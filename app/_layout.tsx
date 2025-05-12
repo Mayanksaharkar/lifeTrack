@@ -1,4 +1,5 @@
 import { AuthProvider, useAuth } from "@/context/AuthContext";
+import { CheckInProvider } from "@/context/CheckInContext";
 import { ExpenseProvider } from "@/context/ExpenseContext";
 import { StyledProvider } from "@gluestack-style/react";
 import { config as UIConfig } from "@gluestack-ui/config";
@@ -6,13 +7,14 @@ import { OverlayProvider } from "@gluestack-ui/overlay";
 import { Stack, useRouter } from "expo-router";
 import { useEffect } from "react";
 import "./globals.css";
-
 export default function RootLayout() {
   return (
     <AuthProvider>
-      <ExpenseProvider>
-        <RootNavigator />
-      </ExpenseProvider>
+      <CheckInProvider>
+        <ExpenseProvider>
+          <RootNavigator />
+        </ExpenseProvider>
+      </CheckInProvider>
     </AuthProvider>
   );
 }

@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log("Error logging in:", errorCode, errorMessage);
+        alert("invalid credentials")
         setIsLoggedIn(false);
       })
       .finally(() => {
