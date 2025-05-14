@@ -3,6 +3,7 @@ import { Feather } from "@expo/vector-icons";
 import { Box, Text } from "@gluestack-ui/themed";
 import { useNavigation } from "@react-navigation/native";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+
 import {
   ActivityIndicator,
   Alert,
@@ -12,7 +13,9 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
+  Animated,
 } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useAuth } from "../../../context/AuthContext";
@@ -28,13 +31,16 @@ const CalendarScreen = () => {
   const [refreshing, setRefreshing] = useState(false);
   const { checkInDisplay, fetchCheckIns, setCheckInDate } = useCheckIn();
 
+  // Animation values for modal
+  const fadeAnim = React.useRef(new Animated.Value(0)).current;
+  const scaleAnim = React.useRef(new Animated.Value(0.9)).current;
+
   const today = new Date();
   const todayString = today.toISOString().split("T")[0];
 
   const handleRefresh = useCallback(async () => {
     try {
       setRefreshing(true);
-      // Make sure fetchCheckIns returns a Promise
       if (user) {
         await fetchCheckIns(user);
       }
@@ -55,8 +61,6 @@ const CalendarScreen = () => {
   };
 
   useEffect(() => {
-    // Initial fetch of check-ins only when component mounts
-    // Using a separate function here to avoid calling handleRefresh
     const initialFetch = async () => {
       try {
         setRefreshing(true);
@@ -71,7 +75,6 @@ const CalendarScreen = () => {
     };
 
     initialFetch();
-    // Empty dependency array ensures this only runs once when component mounts
   }, []);
 
   useEffect(() => {
@@ -82,6 +85,46 @@ const CalendarScreen = () => {
       setCurrentMonth(formatMonthYear(todayString));
     }
   }, [checkInDisplay, todayString]);
+
+  // Modal animation effect
+  useEffect(() => {
+    if (modalVisible) {
+      Animated.parallel([
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.spring(scaleAnim, {
+          toValue: 1,
+          friction: 8,
+          tension: 40,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    } else {
+      // Reset animations when modal is hidden
+      fadeAnim.setValue(0);
+      scaleAnim.setValue(0.9);
+    }
+  }, [modalVisible]);
+
+  const closeModal = () => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+      Animated.timing(scaleAnim, {
+        toValue: 0.9,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      setModalVisible(false);
+    });
+  };
 
   const markedDates = useMemo(() => {
     const marked = {};
@@ -142,6 +185,18 @@ const CalendarScreen = () => {
       setCheckInDate(day.dateString);
       navigation.navigate("check-in");
     }
+  };
+
+  // Format the date for display in a more readable way
+  const getFormattedDisplayDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
   };
 
   return (
@@ -215,33 +270,94 @@ const CalendarScreen = () => {
           </View>
         </Box>
       </ScrollView>
+
+      {/* Enhanced Fancy Modal */}
       <RNModal
-        animationType="fade"
+        animationType="none" // We'll handle animations ourselves
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
+        onRequestClose={closeModal}
       >
-        <View className="flex-1 justify-center items-center bg-black/50 px-4">
-          <View className="bg-white rounded-xl p-6 w-full max-w-md">
-            <Text className="text-lg font-bold mb-2">{selectedDate}</Text>
-            <Text className="mb-2">Tags:</Text>
-            {modalTags.length > 0 ? (
-              modalTags.map((tag, idx) => (
-                <Text key={idx} className="text-blue-500">
-                  • {tag}
-                </Text>
-              ))
-            ) : (
-              <Text className="text-gray-500">No tags available</Text>
-            )}
-            <Pressable
-              className="mt-4 bg-blue-500 p-2 rounded"
-              onPress={() => setModalVisible(false)}
-            >
-              <Text className="text-white text-center">Close</Text>
-            </Pressable>
-          </View>
-        </View>
+        <TouchableWithoutFeedback onPress={closeModal}>
+          <Animated.View
+            style={[
+              StyleSheet.absoluteFill,
+              {
+                backgroundColor: "rgba(0,0,0,0.5)",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 16,
+                opacity: fadeAnim,
+              },
+            ]}
+          >
+            <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
+              <Animated.View
+                className="bg-white rounded-2xl overflow-hidden w-full max-w-md "
+                style={{
+                  transform: [{ scale: scaleAnim }],
+                }}
+              >
+                {/* Modal Header with Gradient */}
+                <View className="px-6 py-4 flex-row justify-between items-center bg-blue-600">
+                  <Text className="text-white text-xl font-bold">
+                    {getFormattedDisplayDate(selectedDate)}
+                  </Text>
+                  <TouchableOpacity
+                    className="bg-white/20 rounded-full p-1"
+                    onPress={closeModal}
+                  >
+                    <Feather name="x" size={20} color="white" />
+                  </TouchableOpacity>
+                </View>
+
+                {/* Modal Content */}
+                <View className="p-6">
+                  <View className="flex-row items-center mb-4">
+                    <Feather
+                      name="tag"
+                      size={20}
+                      color="#3b82f6"
+                      style={{ marginRight: 8 }}
+                    />
+                    <Text className="text-lg font-semibold text-gray-800">
+                      Tags
+                    </Text>
+                  </View>
+
+                  {modalTags.length > 0 ? (
+                    <View className="flex-row flex-wrap mb-6">
+                      {modalTags.map((tag, idx) => (
+                        <View
+                          key={idx}
+                          className="bg-blue-100 px-3 py-1 rounded-full mr-2 mb-2"
+                        >
+                          <Text className="text-blue-700">{tag}</Text>
+                        </View>
+                      ))}
+                    </View>
+                  ) : (
+                    <Text className="text-gray-500 italic mb-6">
+                      No tags available
+                    </Text>
+                  )}
+
+                  <Pressable
+                    className="bg-blue-500 py-3 rounded-xl "
+                    style={{
+                      backgroundColor: "#3b82f6",
+                    }}
+                    onPress={closeModal}
+                  >
+                    <Text className="text-white text-center font-bold">
+                      Close
+                    </Text>
+                  </Pressable>
+                </View>
+              </Animated.View>
+            </TouchableWithoutFeedback>
+          </Animated.View>
+        </TouchableWithoutFeedback>
       </RNModal>
     </SafeAreaView>
   );
