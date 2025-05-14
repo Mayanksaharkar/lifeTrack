@@ -82,8 +82,8 @@ export default function TransactionItem({
               </HStack>
 
               <VStack alignItems="flex-end">
-                <Text fontWeight="$bold" fontSize="$lg" color={"$blue500"}>
-                  ₹{amount}
+                <Text fontWeight="$bold" fontSize="$lg" color={getTypeDetails().color}>
+                 {`${entryType == 'EXPENSE' ?"-" : "+"}`} ₹{amount}
                 </Text>
                 <Text fontSize="$xs" color="$gray500">
                   {date}

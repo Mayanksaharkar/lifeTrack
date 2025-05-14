@@ -13,6 +13,13 @@ export default function ExpenseLayout() {
           headerRight: () => <SaveButton />,
         }}
       />
+       <Stack.Screen
+        name="all"
+        options={{
+          title: 'Transactions',
+          
+        }}
+      />
     </Stack>
   );
 }
