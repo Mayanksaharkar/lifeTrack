@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where, doc, deleteDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
 import React, {
   createContext,
   useCallback,
@@ -31,7 +31,7 @@ const initialCheckInData = {
 
 const CheckInContext = createContext(undefined);
 
-export function CheckInProvider({ children }) {
+export const CheckInProvider = ({ children }) => {
   const [checkInData, setCheckInData] = useState(initialCheckInData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [checkInDisplay, setCheckInDisplay] = useState([]);
@@ -101,14 +101,24 @@ export function CheckInProvider({ children }) {
     }
   };
 
-  const setGridSelection = useCallback((gridType, selections) => {
-    setCheckInData((prev) => ({
-      ...prev,
-      grids: {
-        ...prev.grids,
-        [gridType]: selections,
-      },
-    }));
+  const setGridSelection = useCallback((gridType, selectionOrUpdater) => {
+    setCheckInData(prev => {
+      // Get existing grids or initialize empty object
+      const prevGrids = prev.grids || {};
+      
+      // Calculate the new selection - handle both direct value and updater function
+      const newSelection = typeof selectionOrUpdater === 'function'
+        ? selectionOrUpdater(prevGrids[gridType])
+        : selectionOrUpdater;
+      
+      return {
+        ...prev,
+        grids: {
+          ...prevGrids,
+          [gridType]: newSelection
+        }
+      };
+    });
   }, []);
 
   const resetCheckIn = () => {
@@ -126,9 +136,10 @@ export function CheckInProvider({ children }) {
     }
   };
 
-  const value = useMemo(
+  const contextValue = useMemo(
     () => ({
       checkInData,
+      setCheckInData,
       setMood,
       setNotes,
       setImageUri,
@@ -142,13 +153,15 @@ export function CheckInProvider({ children }) {
       fetchCheckIns,
       deleteCheckIn,
     }),
-    [checkInData, isSubmitting, setGridSelection, checkInDisplay]
+    [checkInData, setMood, setGridSelection, isSubmitting, checkInDisplay]
   );
 
   return (
-    <CheckInContext.Provider value={value}>{children}</CheckInContext.Provider>
+    <CheckInContext.Provider value={contextValue}>
+      {children}
+    </CheckInContext.Provider>
   );
-}
+};
 
 export function useCheckIn() {
   const context = useContext(CheckInContext);
