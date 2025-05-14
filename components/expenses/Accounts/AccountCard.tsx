@@ -7,7 +7,7 @@ import {
 import { Box, HStack, Icon, Text, VStack } from "@gluestack-ui/themed";
 import { Alert, Pressable } from "react-native";
 
-import { Edit3, MoreVertical, Trash2 } from "lucide-react-native";
+import { DollarSign, Edit3, MoreVertical, Trash2 } from "lucide-react-native";
 import React from "react";
 
 interface AccountCardProps {
@@ -40,8 +40,8 @@ const AccountCard = ({
     <Box className="border border-gray rounded-lg px-4 py-3 mb-2 bg-white">
       <HStack justifyContent="space-between" alignItems="center">
         <HStack space="md" alignItems="center">
-          <Box className="p-5     bg-blue" rounded="$full">
-            {/* <Icon as={IconComponent} size="md" color="$white" /> */}
+          <Box className="p-2     bg-blue" rounded="$full">
+            <DollarSign color={'white'}   />
           </Box>
           <VStack>
             <Text className="text-blue text-base font-semibold">{title}</Text>
