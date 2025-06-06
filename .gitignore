@@ -40,3 +40,4 @@ app-example
 firebaseConfig.js
 
 utils
+.env
